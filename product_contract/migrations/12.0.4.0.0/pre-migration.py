@@ -4,7 +4,6 @@
 from openupgradelib import openupgrade
 
 
-@openupgrade.migrate()
 def migrate(env, version):
     # Convert contract_template_id field of the product_template table
     # to a company dependent field
