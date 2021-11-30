@@ -6,9 +6,9 @@ from odoo import api, models
 
 
 class ContractLine(models.Model):
-    _inherit = 'contract.line'
+    _inherit = "contract.line"
 
-    @api.onchange('product_id')
+    @api.onchange("product_id")
     def _onchange_product_id_recurring_info(self):
         res = super(ContractLine, self)._onchange_product_id_recurring_info()
         if self.product_id.is_contract:
