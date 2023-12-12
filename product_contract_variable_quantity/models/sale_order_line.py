@@ -21,14 +21,12 @@ class SaleOrderLine(models.Model):
         comodel_name="contract.line.qty.formula", string="Qty. formula"
     )
 
-    @api.onchange("product_id")
-    def onchange_product(self):
-        res = super(SaleOrderLine, self).onchange_product()
+    @api.depends("product_id")
+    def _compute_qty_info(self):
         for rec in self:
             if rec.product_id.is_contract:
                 rec.qty_type = rec.product_id.qty_type
                 rec.qty_formula_id = rec.product_id.qty_formula_id
-        return res
 
     def _prepare_contract_line_values(self, contract, predecessor_contract_line=False):
         values = super(SaleOrderLine, self)._prepare_contract_line_values(
